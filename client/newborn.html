@@ -70,6 +70,31 @@
 
 </template>
 
+<template name="excalc">
+	<div class="container" id="calc">
+	<div class="row clearfix">
+		<div class="col-md-2 column">
+			
+		</div>
+		<div class="col-md-8 column">
+			<div id="exCalcResults">
+				<h2>Predicted risk of Sepsis per 1000 babies:</h2>
+				<h2 id="exResults"></h2>
+				<h3>Clinical Guidelines:</h3>
+        
+        
+		        <table class="table table-condensed" id="guidelinesTable">
+				  	
+					
+				</table>
+			</div>
+		</div>
+		<div class="col-md-2 column">
+			
+		</div>
+	</div>
+</template>
+
 
 <template name="form">
 <form class="form-horizontal" id="form_data" >
@@ -279,6 +304,13 @@
     <div id="results" class="span6" style="display: none;">
        <h2>Predicted risk of Sepsis per 1000 babies:</h2>
         <h1><div id="results_round"></div></h1>
+        <h3>Clinical Guidelines:</h3>
+        
+        
+        <table class="table table-condensed" id="guidelinesTable">
+		  	
+			
+		</table>
 	<br></br>
 	<button id="reset" class="btn btn-primary">Reset Calculator</button>
     </div>

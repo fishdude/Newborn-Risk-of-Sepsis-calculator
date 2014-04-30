@@ -9,8 +9,17 @@
     color:red;
 }
 
+#riskColorMeter{
+    height:20px;
+    
+}
+
 #boldText{
     font-weight:bold;
+}
+
+#excalc{
+    margin-top: 100px;
 }
 
 #stats_list{
@@ -70,6 +79,36 @@
 #validC{
     color:green;
 }
+
+#exResults{
+    color: blue;
+    font-size: 125%;
+}
+
+.tableHeader{
+    font-weight:bold;
+}
+.greyrec{
+    color: #707070;
+    font-weight:bold;
+}
+.greenrec{
+    color: green;
+    font-weight: bold;
+}
+
+.yellowrec{
+    color: #FF6600;
+    font-weight: bold;
+
+}
+
+.redrec{
+    color: red;
+    font-weight: bold;
+
+}
+
 #validRom{
     color:green;
 }
@@ -77,10 +116,13 @@
 body{
 	background-color: #00FFFF;
 }
+#guidelinesTable{
+    font-size: 50%;
+}
 
 #calc{
 	padding-top:50px;
-	margin-top: 50px;
+	margin-top: 75px;
 }
 
 #forum{
@@ -104,11 +146,26 @@ input {
 }
 
 #results_round{
-    color:red;
+    color:#3300FF;
 }
 #form_label{
    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
    font-size: 130%;
+}
+
+#exCalcResults{
+    background-color: white;
+    
+    background-color: #F0F8FF;
+    color:black;
+    padding: 20px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: black;
+    border-radius: 10px;
+ 
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    font-size: 200%;
 }
 
 
@@ -131,3 +188,4 @@ input {
    font-size: 90%;
    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+
