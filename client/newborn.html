@@ -15,13 +15,13 @@
 						 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">Newborn Sepsis Calculator</a>
 					</div>
 					
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				    <ul class="nav navbar-nav navbar-right">
+					<div class="collapse navbar-collapse">
+				    <ul class="nav navbar-nav navbar-right" id="navvy">
 				    	<li id="boldText"><a href="/">Home</a></li>
 				    	<li id="boldText"><a href="/calculator">Calculator</a></li>
 				    	<li id="boldText"><a href="/compatibility">Compatibility</a></li>
-				    	<li id="boldText"><a href="/guidelines">Clinical Guidelines </a></li>
-				    	<li id="boldText"><a href="/forum">Forum <i id="redNavBarLinkText">coming soon!</i></a></li>
+				    	<li id="boldText"><a href="/guidelines">Clinical Guidelines</a></li>
+				    	
 
 				    </ul>
 				  </div><!-- /.navbar-collapse -->
@@ -70,7 +70,7 @@
 
 </template>
 
-<template name="excalc">
+<!-- <template name="excalc">
 	<div class="container" id="calc">
 	<div class="row clearfix">
 		<div class="col-md-2 column">
@@ -86,14 +86,14 @@
 		        <table class="table table-condensed" id="guidelinesTable">
 				  	
 					
-				</table>
+				</table> 
 			</div>
 		</div>
 		<div class="col-md-2 column">
 			
 		</div>
 	</div>
-</template>
+</template> -->
 
 
 <template name="form">
@@ -256,19 +256,19 @@
 
 </template>
 
-<template name="stats">
+<!-- <template name="stats">
 
 	<div class="container" id="stats">
 		<h1 id="redNavBarLinkText">Coming soon...</h1>
 	</div>	
-</template>
+</template> -->
 
-<template name="canvas">
+<!-- <template name="canvas">
 	<div>
 		
 		 <canvas id="canvas" height="450" width="550"></canvas>
 	</div>
-</template>
+</template> -->
 
 <template name="statsList">
 
@@ -304,13 +304,13 @@
     <div id="results" class="span6" style="display: none;">
        <h2>Predicted risk of Sepsis per 1000 babies:</h2>
         <h1><div id="results_round"></div></h1>
-        <h3>Clinical Guidelines:</h3>
+        <!-- <h3>Clinical Guidelines:</h3>
         
         
         <table class="table table-condensed" id="guidelinesTable">
 		  	
 			
-		</table>
+		</table> -->
 	<br></br>
 	<button id="reset" class="btn btn-primary">Reset Calculator</button>
     </div>
@@ -441,7 +441,7 @@
 			    			<li>The infants in the green box should receive routine couplet care.</li>
 			    		</ul>
 			    		<div>
-			    			<img src="updated_clinical_guidelines.png" >
+			    			<img src="/updated_clin.png" >
 			    		</div>
 			    	</div>
 

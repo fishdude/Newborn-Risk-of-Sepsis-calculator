@@ -177,9 +177,9 @@ if (Meteor.isClient) {
         this.route('calculator', {
             path: '/calculator'
         });
-        this.route('excalc', {
+        /*this.route('excalc', {
             path: '/excalc'
-        });
+        });*/
         this.route('stats', {
             path: '/stats'
         });
@@ -194,7 +194,7 @@ if (Meteor.isClient) {
         });
     });
     // Calculation statistic chartjs object
-    Template.canvas.rendered = function() {
+    /*Template.canvas.rendered = function() {
         var count = [20, 20, 50, 20, 20, 40, 20, 15, 20, 10, 15, 18]
         var lineChartData = {
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "aug", "sep", "oct", "nov", "dec"],
@@ -209,7 +209,7 @@ if (Meteor.isClient) {
             }]
         };
         var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
-    }
+    }*/
     //Temp unit field 'onchange' handler
     Template.form.events({
         'change .unit_radio': function(e) {
@@ -299,7 +299,7 @@ if (Meteor.isClient) {
             });
         }
     }); /*params calculater*/
-    Template.excalc.rendered = function() {
+    /*Template.excalc.rendered = function() {
         var weeks = getQueryVariable("weeks");
         var days = getQueryVariable("days");
         var units = getQueryVariable("units");
@@ -331,7 +331,7 @@ if (Meteor.isClient) {
         console.log(result);
         // write numbered if statement function for abx
         //write numbered if statement function for timing
-    };
+    };*/
     // form submit handler with mongoDB calculation data insert
     Template.form.events({
         "click #submit": function(event) {
@@ -344,7 +344,7 @@ if (Meteor.isClient) {
             var month = date.getMonth() + 1;
             
             var final = ClinicalRecommendation(round_result);
-            var header = '<td class="tableHeader"></td>' + '<td class="tableHeader">Risk per 1000 births</td>' + '<td class="tableHeader">Clinical Recommendation</td>';
+           /* var header = '<td class="tableHeader"></td>' + '<td class="tableHeader">Risk per 1000 births</td>' + '<td class="tableHeader">Clinical Recommendation</td>';
             var rec1 = '<td class="greyrec">EOS risk @ birth</td>' + final[0].risk + final[0].rec;
             var rec2 = '<td class="greenrec">Well Appearing</td>' + final[1].risk + final[1].rec;
             var rec3 = '<td class="yellowrec">Equivocal Exam</td>' + final[2].risk + final[2].rec;
@@ -353,7 +353,7 @@ if (Meteor.isClient) {
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec1;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec2;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec3;
-            document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec4;
+            document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec4;*/
 
             Stats.insert({
                 weeks: form_object[0].value,
