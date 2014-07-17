@@ -64,9 +64,32 @@ function ClinicalRecommendation(risk) {
     roundWellAppearing = Math.round(wellAppearing * 100) / 100;
     roundEquivocal = Math.round(equivocal * 100) / 100;
     roundClinicalIllness = Math.round(clinicalIllness * 100) / 100;
-    recs = [calc1, roundWellAppearing, roundEquivocal, roundClinicalIllness];
+
+    recs = [roundWellAppearing, roundEquivocal];
+
     var recommendation;
-    var recObject = []
+
+    var recObject = [];
+
+    //EOS risk @ Birth Clinical Guildlines conditions
+
+    if (calc1 < 1) {
+        recommendation = "<td>" + "No additional care" + "</td>";
+        var obj = {
+            risk: "<td>" + calc1 + "</td>",
+            rec: recommendation
+        };
+        recObject.push(obj);
+    }else if(calc1 >= 1){
+        recommendation = "<td>" + "Vitals every 4 hours for 24 hours" + "</td>";
+        var obj = {
+            risk: "<td>" + calc1 + "</td>",
+            rec: recommendation
+        };
+        recObject.push(obj);
+    }
+
+    // Well apprearing equivocal exam clinical guidelines conditions
     for (var i = 0; i < recs.length; i++) {
         if (recs[i] < 1) {
             recommendation = "<td>" + "No additional care" + "</td>";
@@ -83,6 +106,24 @@ function ClinicalRecommendation(risk) {
         };
         recObject.push(obj);
     }
+
+    if (roundClinicalIllness < 3) {
+        recommendation = "<td>" + "Consider antibiotic treatment" + "</td>";
+        var obj = {
+            risk: "<td>" + roundClinicalIllness + "</td>",
+            rec: recommendation
+        };
+        recObject.push(obj);
+    }else if(roundClinicalIllness >= 3){
+        recommendation = "<td>" + "Start empiric antibiotics" + "</td>";
+        var obj = {
+            risk: "<td>" + roundClinicalIllness + "</td>",
+            rec: recommendation
+        };
+        recObject.push(obj);
+    }
+
+
     return recObject;
 }
 function selectIncidence(incidence){
@@ -393,19 +434,19 @@ if (Meteor.isClient) {
             
             var final = ClinicalRecommendation(round_result);
             var header = '<td class="tableHeader"></td>' + '<td class="tableHeader">Risk per 1000 births</td>' + '<td class="tableHeader">Clinical Recommendation</td>';
-            //var rec1 = '<td class="greyrec">EOS risk @ birth</td>' + final[0].risk + final[0].rec;
+            var rec1 = '<td class="greyrec">EOS risk @ birth</td>' + final[0].risk + final[0].rec;
             var rec2 = '<td class="greenrec">Well Appearing</td>' + final[1].risk + final[1].rec;
             var rec3 = '<td class="yellowrec">Equivocal Exam</td>' + final[2].risk + final[2].rec;
             var rec4 = '<td class="redrec">Clinical illness</td>' + final[3].risk + final[3].rec;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = header;
-            //document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec1;
+            document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec1;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec2;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec3;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec4;
 
         
 
-            $("#results_round").html(round_result).fadeIn('fast');
+            //$("#results_round").html(round_result).fadeIn('fast');
             $('#submit').hide();
             $('#results').slideDown();
             //scroll to results div on mobile browsers

@@ -104,10 +104,10 @@
 		<label class="control-label" id="form_label" for="incidence">Incidence of Early-Onset Sepsis:</label>
 		<div class="controls">
 			<select class="form-control" name="incidence" id="incidence">
-			  <option  value="0">0.3</option>
-			  <option  value="1">0.4</option>
-			  <option  value="2">0.5</option>
-			  <option  value="3">0.6</option>
+			  <option  value="0">0.3/1000 live births (KPNC incidence)</option>
+			  <option  value="1">0.4/1000 live births</option>
+			  <option  value="2">0.5/1000 live births (CDC national)</option>
+			  <option  value="3">0.6/1000 live births</option>
 			</select>	
 		</div>
 	</div>
@@ -240,17 +240,17 @@
 	<div class="control-group">
 	  <label class="control-label" id="form_label" for="abx">ABX type and timing:</label>
 	  <div class="controls">
-	    <label class="radio" id="select_label" for="abx-0">
-	      <input type="radio" name="abx" id="abx-0" value="GBS Specific given prior to birth" >
-	      GBS Specific given =&gt; 2 hours prior to birth
-	    </label>
 	    <label class="radio" id="select_label" for="abx-1">
 	      <input type="radio" name="abx" id="abx-1" value="Broad spectrum => 4 hrs prior to birth">
-	      Broad spectrum =&gt; 4 hours prior to birth
+	      Broad spectrum abx =&gt; 4 hours prior to birth
 	    </label>
 	    <label class="radio" id="select_label" for="abx-2">
 	      <input type="radio" name="abx" id="abx-2" value="Broad spectrum < 4 hrs prior to birth">
-	      Broad spectrum =&gt; 2 hours and &lt; 4 hours prior to birth
+	      Broad spectrum abx 2-3.9 hours prior to birth
+	    </label>
+	    <label class="radio" id="select_label" for="abx-0">
+	      <input type="radio" name="abx" id="abx-0" value="GBS Specific given prior to birth" >
+	      GBS Specific abx =&gt; 2 hours prior to birth
 	    </label>
 	    <label class="radio" id="select_label" for="abx-3">
 	      <input type="radio" name="abx" id="abx-3" value="none">
@@ -315,9 +315,8 @@
 
 <template name="results">
     <div id="results" class="span6" style="display: none;">
-       <h2>EOS risk @ birth:</h2>
-        <h1><div id="results_round"></div></h1>
-         <h3>Clinical Guidelines:</h3>
+       
+        
         
         
         <table class="table table-condensed" id="guidelinesTable">
