@@ -1,3 +1,34 @@
+/* 
+To do tasks for EOS update release
+    1) Implement intercept values for inciedence.
+        a) remove hard coded incidence value
+        b)  0.3  ->  40.0528 
+            0.4  ->  40.3415 
+            0.5  ->  40.5656 
+            0.6  ->  40.7489 
+        c) create drop down select for incidence value
+
+
+    2) refactor guidlines so EOS risk @ birth doesnt give a clinical guidline unless risk is >1 "Vitals every 4 hours for 24 hours"
+
+    3) If Eos risk come out > 1  vital signs q 4 hours for first 24 hours
+
+    4) new verbiage for clinical guidlines
+
+
+    "Blood culture and vitals every 4 hours for 24 hours"
+
+    "Start empiric antibiotics"
+
+    "No additional care"
+
+*/
+
+
+
+
+
+
 Stats = new Meteor.Collection("stats");
 Hits = new Meteor.Collection("hits");
 Posts = new Meteor.Collection("posts");
@@ -24,9 +55,9 @@ function ClinicalRecommendation(risk) {
     perThousand = risk / 1000;
     odds = perThousand / (1 - perThousand);
     calc1 = risk;
-    preRec1 = odds * .4;
-    preRec2 = odds * 4.9;
-    preRec3 = odds * 26.9;
+    preRec1 = odds * .41;
+    preRec2 = odds * 5.0;
+    preRec3 = odds * 21.2;
     wellAppearing = backToRisk(preRec1) * 1000;
     equivocal = backToRisk(preRec2) * 1000;
     clinicalIllness = backToRisk(preRec3) * 1000;
@@ -38,13 +69,13 @@ function ClinicalRecommendation(risk) {
     var recObject = []
     for (var i = 0; i < recs.length; i++) {
         if (recs[i] < 1) {
-            recommendation = "<td>" + "routine care" + "</td>";
+            recommendation = "<td>" + "No additional care" + "</td>";
         }
         if (recs[i] >= 1 && recs[i] < 3) {
-            recommendation = "<td>" + "enhanced vitals and blood culture" + "</td>";
+            recommendation = "<td>" + "Blood culture and vitals every 4 hours for 24 hours" + "</td>";
         }
         if (recs[i] >= 3) {
-            recommendation = "<td>" + "blood culture and antibiotics" + "</td>";
+            recommendation = "<td>" + "Start empiric antibiotics" + "</td>";
         }
         var obj = {
             risk: "<td>" + recs[i] + "</td>",
@@ -54,6 +85,22 @@ function ClinicalRecommendation(risk) {
     }
     return recObject;
 }
+function selectIncidence(incidence){
+    var incidenceComponent;
+    if (incidence == "0") {
+        incidenceComponent = 40.0528;
+    } else if (incidence == "1") {
+        incidenceComponent = 40.3415;
+    } else if (incidence == "2") {
+        incidenceComponent = 40.5656;
+    } else if (incidence == "3") {
+        incidenceComponent = 40.7489;
+    }
+
+    return incidenceComponent;
+}
+
+
 // Rupture of membrain component
 
 function ruptureOfMembrain(rom) {
@@ -141,14 +188,14 @@ function gestationalAgeComponent(weeks, days) {
 }
 // call all function components and sum for probability 
 
-function eosProbability(weeks, days, unit, temp, rom, gbs, abx) {
+function eosProbability(incidence, weeks, days, unit, temp, rom, gbs, abx) {
     var ageWithCoefficient = gestationalAge(weeks, days) * -6.93250,
         ageComponent = gestationalAgeComponent(weeks, days),
         tempComponent = temperature(unit, temp),
         romComponent = ruptureOfMembrain(rom),
         gbsComponent = calculateGbs(gbs),
         abxComponent = calculateAbx(abx),
-        sepCoefficient = 40.712;
+        sepCoefficient = selectIncidence(incidence);
     //sum 
     var sum = (ageWithCoefficient + tempComponent + romComponent + gbsComponent + abxComponent + ageComponent + sepCoefficient);
     var probability = (1 / (1 + Math.exp(-sum)) * 1000);
@@ -337,35 +384,26 @@ if (Meteor.isClient) {
         "click #submit": function(event) {
             event.preventDefault();
             var form_object = ($('#form_data').serializeArray());
+            //eosProbability(incidence, weeks, days, unit, temp, rom, gbs, abx)
             var result = eosProbability(
-            form_object[0].value, form_object[1].value, form_object[2].value, form_object[3].value, form_object[4].value, form_object[5].value, form_object[6].value);
+            form_object[0].value, form_object[1].value, form_object[2].value, form_object[3].value, form_object[4].value, form_object[5].value, form_object[6].value, form_object[7].value);
             var round_result = Math.round(result * 100) / 100;
             var date = new Date();
             var month = date.getMonth() + 1;
             
             var final = ClinicalRecommendation(round_result);
-           /* var header = '<td class="tableHeader"></td>' + '<td class="tableHeader">Risk per 1000 births</td>' + '<td class="tableHeader">Clinical Recommendation</td>';
-            var rec1 = '<td class="greyrec">EOS risk @ birth</td>' + final[0].risk + final[0].rec;
+            var header = '<td class="tableHeader"></td>' + '<td class="tableHeader">Risk per 1000 births</td>' + '<td class="tableHeader">Clinical Recommendation</td>';
+            //var rec1 = '<td class="greyrec">EOS risk @ birth</td>' + final[0].risk + final[0].rec;
             var rec2 = '<td class="greenrec">Well Appearing</td>' + final[1].risk + final[1].rec;
             var rec3 = '<td class="yellowrec">Equivocal Exam</td>' + final[2].risk + final[2].rec;
             var rec4 = '<td class="redrec">Clinical illness</td>' + final[3].risk + final[3].rec;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = header;
-            document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec1;
+            //document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec1;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec2;
             document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec3;
-            document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec4;*/
+            document.getElementById("guidelinesTable").insertRow(-1).innerHTML = rec4;
 
-            Stats.insert({
-                weeks: form_object[0].value,
-                days: form_object[1].value,
-                tempUnit: form_object[2].value,
-                temp: form_object[3].value,
-                rom: form_object[4].value,
-                gbs: form_object[5].value,
-                abx: form_object[6].value,
-                probability: round_result,
-                timeStamp: date
-            });
+        
 
             $("#results_round").html(round_result).fadeIn('fast');
             $('#submit').hide();

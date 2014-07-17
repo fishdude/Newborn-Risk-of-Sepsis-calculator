@@ -100,6 +100,19 @@
 <form class="form-horizontal" id="form_data" >
 	<fieldset>
 
+	<div class="control-group">
+		<label class="control-label" id="form_label" for="incidence">Incidence of Early-Onset Sepsis:</label>
+		<div class="controls">
+			<select class="form-control" name="incidence" id="incidence">
+			  <option  value="0">0.3</option>
+			  <option  value="1">0.4</option>
+			  <option  value="2">0.5</option>
+			  <option  value="3">0.6</option>
+			</select>	
+		</div>
+	</div>
+
+
 	<!-- age weeks input-->
 	<div class="control-group">
 	  <label class="control-label" id="form_label" for="weeks">Weeks:</label>
@@ -302,15 +315,15 @@
 
 <template name="results">
     <div id="results" class="span6" style="display: none;">
-       <h2>Predicted risk of Sepsis per 1000 babies:</h2>
+       <h2>EOS risk @ birth:</h2>
         <h1><div id="results_round"></div></h1>
-        <!-- <h3>Clinical Guidelines:</h3>
+         <h3>Clinical Guidelines:</h3>
         
         
         <table class="table table-condensed" id="guidelinesTable">
 		  	
 			
-		</table> -->
+		</table> 
 	<br></br>
 	<button id="reset" class="btn btn-primary">Reset Calculator</button>
     </div>
