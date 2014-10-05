@@ -6,9 +6,7 @@
 standard-app-packages
 autopublish
 insecure
-preserve-inputs
-iron-router
-bootstrap-3
 jquery
-chartjs
 spiderable
+iron:router
+mizzao:bootstrap-3
