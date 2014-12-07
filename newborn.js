@@ -1,32 +1,3 @@
-/* 
-To do tasks for EOS update release
-    1) Implement intercept values for inciedence.
-        a) remove hard coded incidence value
-        b)  0.3  ->  40.0528 
-            0.4  ->  40.3415 
-            0.5  ->  40.5656 
-            0.6  ->  40.7489 
-        c) create drop down select for incidence value
-
-
-    2) refactor guidlines so EOS risk @ birth doesnt give a clinical guidline unless risk is >1 "Vitals every 4 hours for 24 hours"
-
-    3) If Eos risk come out > 1  vital signs q 4 hours for first 24 hours
-
-    4) new verbiage for clinical guidlines
-
-
-    "Blood culture and vitals every 4 hours for 24 hours"
-
-    "Start empiric antibiotics"
-
-    "No additional care"
-
-*/
-
-
-
-
 
 
 Stats = new Meteor.Collection("stats");
@@ -281,23 +252,7 @@ if (Meteor.isClient) {
             path: '/guidelines'
         });
     });
-    // Calculation statistic chartjs object
-    /*Template.canvas.rendered = function() {
-        var count = [20, 20, 50, 20, 20, 40, 20, 15, 20, 10, 15, 18]
-        var lineChartData = {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "aug", "sep", "oct", "nov", "dec"],
-            datasets: [{
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                data: count
-                //[20, 20, 20, 20, 20, 20, 30, 0, 0, 0, 0, 0]
-                //data: []
-            }]
-        };
-        var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
-    }*/
+    
     //Temp unit field 'onchange' handler
     Template.form.events({
         'change .unit_radio': function(e) {
