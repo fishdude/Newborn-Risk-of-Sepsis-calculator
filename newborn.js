@@ -253,6 +253,9 @@ if (Meteor.isClient) {
         });
     });
     
+    Router.configure({
+        trackPageView: true
+    });
     //Temp unit field 'onchange' handler
     Template.form.events({
         'change .unit_radio': function(e) {
